@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🪔 Luxury Thadingyut ePostcard 🕊️</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display, Poppins, Padauk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * {
+            font-family: 'Padauk', 'Poppins', sans-serif;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Luxurious Burgundy & Champagne Gold Gradient Background */
+        body {
+            background: linear-gradient(135deg, #1c0a13 0%, #311022 35%, #4a152e 70%, #200814 100%);
+            background-size: 300% 300%;
+            animation: luxuryBgAnimation 18s ease infinite;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        @keyframes luxuryBgAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .luxury-card {
+            background: rgba(49, 16, 34, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(234, 179, 8, 0.35);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        .gold-border-glow {
+            box-shadow: 0 0 30px rgba(234, 179, 8, 0.25), inset 0 0 15px rgba(234, 179, 8, 0.1);
+        }
+
+        /* Gold Gradient Text */
+        .gold-text {
+            background: linear-gradient(135deg, #fef08a 0%, #fde047 50%, #ca8a04 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Gold Button Styling */
+        .gold-btn {
+            background: linear-gradient(135deg, #fef08a 0%, #eab308 50%, #ca8a04 100%);
+            color: #200814;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(234, 179, 8, 0.4);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gold-btn:hover {
+            box-shadow: 0 15px 35px rgba(234, 179, 8, 0.6);
+            transform: translateY(-3px);
+            filter: brightness(1.08);
+        }
+
+        @keyframes floatEntrance {
+            0% { transform: translateY(-100px) rotate(-5deg) scale(0.9); opacity: 0; }
+            60% { transform: translateY(10px) rotate(3deg) scale(1.02); opacity: 1; }
+            100% { transform: translateY(0px) rotate(0deg) scale(1); opacity: 1; }
+        }
+
+        @keyframes floatSway {
+            0%, 100% { transform: translateY(0px) rotate(-2deg); }
+            50% { transform: translateY(-14px) rotate(2deg); }
+        }
+
+        .envelope-entrance {
+            animation: floatEntrance 2.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, floatSway 5s ease-in-out 2.2s infinite;
+        }
+
+        /* Gold & Ruby Floating Lanterns */
+        .luxury-lantern {
+            position: absolute;
+            bottom: -80px;
+            width: 28px;
+            height: 42px;
+            background: linear-gradient(to top, #e11d48, #f43f5e, #fef08a);
+            border-radius: 8px 8px 12px 12px;
+            box-shadow: 0 0 25px rgba(234, 179, 8, 0.6), 0 0 15px rgba(225, 29, 72, 0.5);
+            animation: floatLuxuryLantern 14s linear infinite;
+            opacity: 0.85;
+            pointer-events: none;
+        }
+
+        .luxury-lantern::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #fef08a;
+        }
+
+        @keyframes floatLuxuryLantern {
+            0% { transform: translateY(0) translateX(0) scale(0.6); opacity: 0; }
+            10% { opacity: 0.9; }
+            90% { opacity: 0.9; }
+            100% { transform: translateY(-110vh) translateX(40px) scale(1.1); opacity: 0; }
+        }
+
+        /* Sparkling Gold Stars */
+        .gold-sparkle {
+            position: absolute;
+            color: #fef08a;
+            pointer-events: none;
+            animation: sparklePulse infinite alternate ease-in-out;
+            filter: drop-shadow(0 0 6px rgba(234, 179, 8, 0.8));
+        }
+
+        @keyframes sparklePulse {
+            0% { opacity: 0.2; transform: scale(0.7) rotate(0deg); }
+            100% { opacity: 0.95; transform: scale(1.4) rotate(20deg); }
+        }
+
+        /* Step Transition Utility */
+        .step-transition {
+            transition: opacity 0.45s ease-in-out, transform 0.45s ease-in-out;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen relative p-4 text-gray-100 overflow-hidden">
+
+    <div id="lanternsContainer" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
+    <div id="sparklesContainer" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
+
+    <!-- MAIN APP CONTAINER -->
+    <main class="relative z-10 w-full max-w-xl mx-auto flex flex-col items-center justify-center min-h-[85vh]">
+
+        <!-- ==================== STEP 1: LUXURY ENVELOPE / BOUQUET ==================== -->
+        <div id="step1" class="step-transition flex flex-col items-center justify-center text-center w-full">
+            <div class="mb-6 px-6 py-2.5 rounded-full luxury-card gold-border-glow backdrop-blur-md flex items-center gap-2">
+                <span class="text-amber-300 animate-pulse">🪔</span>
+                <p class="text-amber-100 font-medium text-sm md:text-base tracking-wider font-playfair">
+                    A Royal Thadingyut Gift For You
+                </p>
+                <span class="text-amber-300 animate-pulse">✨</span>
+            </div>
+
+            <!-- Envelope Bouquet Image Trigger -->
+            <div id="envelopeContainer" class="envelope-entrance cursor-pointer relative group transition-transform duration-300 my-4">
+                <div class="absolute -inset-6 bg-gradient-to-r from-amber-500/20 via-rose-500/20 to-amber-500/20 rounded-full blur-3xl group-hover:blur-2xl transition-all duration-500"></div>
+                
+                <img id="bouquetImg" 
+                     src="https://i.ibb.co/pvzHgNLR/Bouquet.png" 
+                     alt="Thadingyut Luxury Greeting Envelope Bouquet" 
+                     onerror="this.onerror=null; this.src='https://placehold.co/320x320/4a152e/fef08a?text=Luxury+Thadingyut+💌';"
+                     class="w-64 h-64 md:w-80 md:h-80 object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.7)] transform group-hover:scale-105 transition-all duration-300 relative z-10">
+            </div>
+
+            <p class="mt-4 text-amber-200/80 text-xs md:text-sm tracking-widest uppercase animate-bounce">
+                Tap to unwrap envelope ✨
+            </p>
+        </div>
+
+        <!-- ==================== STEP 2: LUXURY POSTCARD ==================== -->
+        <div id="step2" class="hidden step-transition w-full max-w-md flex flex-col items-center">
+            <div class="w-full luxury-card rounded-3xl p-6 md:p-8 relative gold-border-glow">
+                
+                <!-- Decorative Top Icons -->
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-amber-400 text-xl">🪔</span>
+                    <h2 class="text-2xl md:text-3xl font-bold gold-text font-playfair text-center tracking-wide">
+                        သီတင်းကျွတ်မင်္ဂလာပါ
+                    </h2>
+                    <span class="text-amber-400 text-xl">✨</span>
+                </div>
+                
+                <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto rounded-full mb-6"></div>
+
+                <!-- Greeting Paragraph -->
+                <p class="text-amber-50/90 text-base md:text-lg leading-relaxed text-justify my-4 font-normal font-playfair">
+                    ဒီသီတင်းကျွတ် အခါသမယမှာ စိတ်၏ချမ်းသာခြင်း၊ ကိုယ်၏ကျန်းမာခြင်းတို့ဖြင့် ပြည့်စုံပြီး လိုအင်ဆန္ဒများအားလုံး တစ်လုံးတစ်ဝတည်း ပြည့်ဝပါစေ ။ ဆီမီးရောင်စုံလေးတွေလိုပဲ ဘဝတစ်လျှောက်လုံး လင်းလက်တောက်ပပါစေနော်။ 💛✨
+                </p>
+
+                <div class="text-right mt-6 italic text-amber-300 font-semibold text-sm font-playfair">
+                    — Crafted For You With Love
+                </div>
+
+                <!-- Next Button to Step 3 -->
+                <button onclick="goToStep(3)" class="w-full mt-7 gold-btn py-4 px-6 rounded-2xl text-base md:text-lg flex items-center justify-center gap-3 transition-all active:scale-95">
+                    <span class="font-semibold tracking-wide">Music Video For You</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== STEP 3: EXCLUSIVE YOUTUBE VIDEO SECTION ==================== -->
+        <div id="step3" class="hidden step-transition w-full max-w-md flex flex-col items-center text-center">
+            <h2 class="text-2xl md:text-3xl font-bold gold-text font-playfair mb-2 flex items-center justify-center gap-2">
+                <span>🎵</span> Musical Melody
+            </h2>
+            <p class="text-amber-200/80 text-sm mb-5 font-light">Enjoy this special melody selected for you</p>
+
+            <!-- Responsive Embed Container with Gold Frame -->
+            <div class="relative w-full overflow-hidden rounded-3xl shadow-2xl bg-black aspect-video my-2 border border-amber-400/40 gold-border-glow">
+                <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/70bwApC8FsY?si=v3OXllCKK1pfnHIa&amp;start=15" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+
+            <!-- Next Button to Step 4 -->
+            <button onclick="goToStep(4)" class="w-full mt-7 gold-btn py-4 px-6 rounded-2xl text-base md:text-lg flex items-center justify-center gap-3 transition-all active:scale-95">
+                <span class="font-semibold tracking-wide">Continue</span>
+                <i class="fa-solid fa-heart text-xs text-rose-900"></i>
+            </button>
+        </div>
+
+        <!-- ==================== STEP 4: INTERACTIVE QUESTION & GIF ==================== -->
+        <div id="step4" class="hidden step-transition w-full max-w-md flex flex-col items-center text-center">
+            
+            <!-- GIF Display Container (Frame Removed) -->
+            <div class="w-48 h-48 md:w-56 md:h-56 mb-4 relative flex items-center justify-center">
+                <img id="questionGif" 
+                     src="https://media.tenor.com/1hePhNN7SesAAAAi/friday.gif" 
+                     alt="Cute Asking GIF" 
+                     class="w-full h-full object-contain">
+            </div>
+
+            <!-- Question Text -->
+            <h2 id="questionText" class="text-2xl md:text-3xl font-bold gold-text font-playfair mb-8 leading-relaxed">
+                ဒီသီတင်းကျွတ်အမှီတော့<br>ပြန်ချစ်ပါတော့နော်... 🥺💖
+            </h2>
+
+            <!-- Interactive Buttons Container -->
+            <div class="flex items-center justify-center gap-6 w-full relative min-h-[120px]">
+                <!-- YES Button (Grows on No clicks) -->
+                <button id="btnYes" 
+                        onclick="handleYesClick()" 
+                        class="gold-btn py-3.5 px-9 rounded-2xl transition-transform duration-200 ease-out flex items-center justify-center gap-2 text-lg z-20 active:scale-95">
+                    <span class="font-bold">YES! 💖</span>
+                </button>
+
+                <!-- NO Button (Shrinks on clicks) -->
+                <button id="btnNo" 
+                        onclick="handleNoClick()" 
+                        class="bg-black/40 hover:bg-black/60 text-amber-200 font-semibold py-3.5 px-6 rounded-2xl shadow-md border border-amber-500/30 transition-transform duration-200 ease-out text-base z-10 backdrop-blur-md">
+                    <span>No 🥺</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== STEP 5: FINAL CELEBRATION ==================== -->
+        <div id="step5" class="hidden step-transition w-full max-w-md flex flex-col items-center text-center">
+            
+            <div class="text-4xl mb-2 animate-bounce">🎉💖🪔</div>
+
+            <!-- Happy Celebration GIF (Frame Removed) -->
+            <div class="w-52 h-52 md:w-60 md:h-60 mb-4 relative">
+                <img id="celebrationGif" 
+                     src="https://media.tenor.com/mKr-KcMW9RcAAAAi/cute-bears.gif" 
+                     alt="Happy Love Celebration GIF" 
+                     class="w-full h-full object-contain">
+            </div>
+
+            <!-- Final Love Message -->
+            <h2 class="text-2xl md:text-3xl font-extrabold gold-text font-playfair mb-3 leading-relaxed">
+                ကိုယ်လည်းမင်းကို<br>သိပ်ချစ်တယ်နော် ဟဲဟဲ! <br><span class="text-rose-400 font-playfair italic">I Love You Too! 💖🥰</span>
+            </h2>
+
+            <p class="text-amber-100/90 text-base mt-2 font-medium luxury-card px-6 py-2.5 rounded-full border border-amber-400/30">
+                ပျော်ရွှင်စွာနဲ့ အတူတူရှိသွားကြမယ်နော်... ✨
+            </p>
+
+            <!-- Replay / Reset Button -->
+            <button onclick="resetApp()" class="mt-8 text-amber-300 hover:text-amber-100 font-semibold underline text-sm tracking-wide transition-all flex items-center gap-2">
+                <i class="fa-solid fa-rotate-right text-xs"></i>
+                <span>အစကပြန်စမည်</span>
+            </button>
+        </div>
+
+    </main>
+
+    <script>
+        let currentStep = 1;
+        let noClickCount = 0;
+        let yesScale = 1;
+        let noScale = 1;
+
+        // Pleading GIFs array for "No" clicks
+        const sadGifs = [
+            "https://media.tenor.com/LPcZAoN75_wAAAAj/bubu-dudu-sseeyall.gif",
+            "https://media.tenor.com/q9124Fxqpu8AAAAi/sseeyall-bubu-dudu.gif",
+            "https://media.tenor.com/LPcZAoN75_wAAAAj/bubu-dudu-sseeyall.gif",
+            "https://media.tenor.com/IYAOkEOsPVoAAAAi/tkthao219-bubududu.gif",
+            "https://media.tenor.com/Q9VuGIKQqEMAAAAi/love-bear.gif"
+        ];
+
+        // Burmese Pleading Prompts
+        const pleadingTexts = [
+            "ပြန်ချစ်ပါတော့... 🥺💖",
+            "တကယ်ပဲ No ကို နှိပ်မှာလား? 😭",
+            "ပြန်စဉ်းစားပါဦး 💔",
+            "ကျေးဇူးပြုပြီး Yes လေးနှိပ်ပေးပါနော်... 🥺🙏",
+            "မရဘူးနော် Yes ပဲနှိပ်ရမယ်! 😤❤️"
+        ];
+
+        /* Setup event listeners on window load */
+        window.addEventListener('DOMContentLoaded', () => {
+            createLanterns();
+            createSparkles();
+            setupEnvelopeClick();
+        });
+
+        /* Create Floating Gold & Ruby Lanterns */
+        function createLanterns() {
+            const container = document.getElementById('lanternsContainer');
+            const lanternCount = 15;
+
+            for (let i = 0; i < lanternCount; i++) {
+                const lantern = document.createElement('div');
+                lantern.className = 'luxury-lantern';
+                lantern.style.left = `${Math.random() * 100}%`;
+                lantern.style.animationDuration = `${10 + Math.random() * 8}s`;
+                lantern.style.animationDelay = `${Math.random() * 6}s`;
+                const scale = 0.5 + Math.random() * 0.7;
+                lantern.style.transform = `scale(${scale})`;
+                container.appendChild(lantern);
+            }
+        }
+
+        /* Create Floating Gold Sparkles */
+        function createSparkles() {
+            const container = document.getElementById('sparklesContainer');
+            const sparkleCount = 25;
+
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'gold-sparkle fa-solid fa-star';
+                const size = 10 + Math.random() * 14;
+                sparkle.style.fontSize = `${size}px`;
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.animationDuration = `${2 + Math.random() * 3}s`;
+                sparkle.style.animationDelay = `${Math.random() * 3}s`;
+                container.appendChild(sparkle);
+            }
+        }
+
+        /* Step 1 Envelope Tap Logic */
+        function setupEnvelopeClick() {
+            const envContainer = document.getElementById('envelopeContainer');
+            envContainer.addEventListener('click', () => {
+                goToStep(2);
+            });
+        }
+
+        /* Smooth Step Navigation */
+        function goToStep(step) {
+            const currentEl = document.getElementById(`step${currentStep}`);
+            if (currentEl) {
+                currentEl.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => {
+                    currentEl.classList.add('hidden');
+                    currentEl.classList.remove('opacity-0', 'scale-95');
+
+                    currentStep = step;
+                    const nextEl = document.getElementById(`step${step}`);
+                    if (nextEl) {
+                        nextEl.classList.remove('hidden');
+                        nextEl.classList.add('opacity-0', 'scale-95');
+                        setTimeout(() => {
+                            nextEl.classList.remove('opacity-0', 'scale-95');
+                            nextEl.classList.add('opacity-100', 'scale-100');
+                        }, 50);
+                    }
+                }, 300);
+            }
+        }
+
+        /* Step 4: Handle "NO" Button Click */
+        function handleNoClick() {
+            noClickCount++;
+
+            // Grow YES button smoothly
+            yesScale += 0.35;
+            const btnYes = document.getElementById('btnYes');
+            btnYes.style.transform = `scale(${yesScale})`;
+
+            // Shrink NO button smoothly
+            noScale = Math.max(0.2, noScale - 0.18);
+            const btnNo = document.getElementById('btnNo');
+            btnNo.style.transform = `scale(${noScale})`;
+
+            if (noScale <= 0.3) {
+                btnNo.style.opacity = '0.35';
+            }
+
+            // Update GIF
+            const questionGif = document.getElementById('questionGif');
+            const gifIndex = Math.min(noClickCount, sadGifs.length - 1);
+            questionGif.src = sadGifs[gifIndex];
+
+            // Update Text
+            const questionText = document.getElementById('questionText');
+            const textIndex = Math.min(noClickCount, pleadingTexts.length - 1);
+            questionText.innerText = pleadingTexts[textIndex];
+        }
+
+        /* Step 4: Handle "YES" Button Click */
+        function handleYesClick() {
+            // Formspree ဆီသို့ No နှိပ်လိုက်တဲ့အကြိမ်ရေ ပို့ခြင်း
+            const formData = new FormData();
+            formData.append('message', `ePostcard မှာ 'No' ကို ${noClickCount} ကြိမ်နှိပ်ပြီးမှ 'Yes' ကိုနှိပ်လိုက်ပါတယ်! 💖🪔`);
+            formData.append('_subject', 'Thadingyut ePostcard - Interaction Report ✨');
+
+            fetch('', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Successfully sent data to Gmail via Formspree.');
+                }
+            }).catch(error => {
+                console.error('Error sending data:', error);
+            });
+
+            goToStep(5);
+            triggerLuxuryConfetti();
+        }
+
+        /* Luxurious Gold & Ruby Confetti Celebration */
+        function triggerLuxuryConfetti() {
+            confetti({
+                particleCount: 120,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#eab308', '#fef08a', '#e11d48', '#f43f5e', '#ffffff']
+            });
+
+            setTimeout(() => {
+                confetti({
+                    particleCount: 90,
+                    angle: 60,
+                    spread: 60,
+                    origin: { x: 0 },
+                    colors: ['#eab308', '#fef08a', '#e11d48']
+                });
+                confetti({
+                    particleCount: 90,
+                    angle: 120,
+                    spread: 60,
+                    origin: { x: 1 },
+                    colors: ['#eab308', '#fef08a', '#f43f5e']
+                });
+            }, 350);
+
+            const duration = 3.5 * 1000;
+            const animationEnd = Date.now() + duration;
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 40 * (timeLeft / duration);
+                confetti({
+                    particleCount,
+                    startVelocity: 35,
+                    spread: 360,
+                    ticks: 70,
+                    origin: {
+                        x: Math.random(),
+                        y: Math.random() - 0.2
+                    },
+                    colors: ['#eab308', '#fef08a', '#e11d48', '#ffffff']
+                });
+            }, 250);
+        }
+
+        /* Reset Application to Step 1 */
+        function resetApp() {
+            noClickCount = 0;
+            yesScale = 1;
+            noScale = 1;
+
+            const btnYes = document.getElementById('btnYes');
+            const btnNo = document.getElementById('btnNo');
+            if (btnYes) btnYes.style.transform = 'scale(1)';
+            if (btnNo) {
+                btnNo.style.transform = 'scale(1)';
+                btnNo.style.opacity = '1';
+            }
+
+            document.getElementById('questionGif').src = sadGifs[0];
+            document.getElementById('questionText').innerText = pleadingTexts[0];
+
+            goToStep(1);
+        }
+    </script>
+</body>
+</html>
